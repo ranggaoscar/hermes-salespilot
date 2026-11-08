@@ -1,0 +1,55 @@
+<!doctype html>
+<!-- Source for assets/catalog-cover.png (1200x600) and assets/brand/readme-hero.png (2x).
+     Render: open at 1200x600, screenshot the viewport. The UI capture is a synthetic fixture
+     (fictional companies on .test domains), never a real customer. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=block" rel="stylesheet">
+<style>
+  :root{--ink:#0E1714;--ivory:#F4F0E6;--sage:#9DB2A8;--line:rgba(244,240,230,.12);--jade:#3FA47F;--ember:#E8954F}
+  html,body{margin:0;width:1200px;height:600px;overflow:hidden;background:var(--ink)}
+  body{font-family:Geist,"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;color:var(--ivory);position:relative;-webkit-font-smoothing:antialiased}
+  .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(63,164,127,.07),transparent 55%)}
+  .left{position:absolute;left:72px;top:78px;width:520px}
+  .icon{width:72px;height:72px;display:block}
+  h1{margin:30px 0 0;font-size:76px;line-height:1;font-weight:600;letter-spacing:-.045em}
+  .tag{margin:18px 0 0;font-size:25px;line-height:1.3;color:var(--sage);letter-spacing:-.01em;max-width:470px}
+  .tag b{color:var(--ivory);font-weight:500}
+  .track{position:absolute;left:72px;bottom:118px;display:flex;align-items:flex-start;gap:0}
+  .st{display:flex;flex-direction:column;align-items:flex-start;gap:9px;width:84px}
+  .st i{display:block;width:10px;height:10px;border-radius:50%;border:2px solid var(--sage);background:var(--ink);position:relative;z-index:1}
+  .st span{font:500 12.5px/1 "Geist Mono",ui-monospace,monospace;color:var(--sage);letter-spacing:.01em}
+  .st.on i{background:var(--jade);border-color:var(--jade)}
+  .st.you i{background:var(--ivory);border-color:var(--ivory)}
+  .st.you span{color:var(--ivory)}
+  .st.hot i{background:var(--ember);border-color:var(--ember)}
+  .st.hot span{color:var(--ember)}
+  .rail{position:absolute;left:77px;bottom:145px;width:420px;height:2px;background:var(--line)}
+  .foot{position:absolute;left:72px;bottom:52px;display:flex;gap:18px;align-items:center;font:500 12px/1 "Geist Mono",ui-monospace,monospace;letter-spacing:.16em;color:var(--sage);text-transform:uppercase}
+  .foot em{font-style:normal;color:var(--ivory)}
+  .foot s{width:1px;height:12px;background:var(--line);text-decoration:none}
+  .shot{position:absolute;left:620px;top:72px;width:860px;height:560px;border-radius:16px;overflow:hidden;border:1px solid rgba(244,240,230,.14);box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 6px rgba(244,240,230,.03);background:#fff url(brand/ui-customers.png) 0 0/1060px auto no-repeat}
+</style>
+</head>
+<body>
+  <div class="shade"></div>
+  <div class="left">
+    <img class="icon" src="brand/app-icon.svg" alt="">
+    <h1>SalesPilot</h1>
+    <p class="tag">The AI sales desk inside Hermes. <b>Find customers, email after your approval, and see who is hot.</b></p>
+  </div>
+  <div class="rail"></div>
+  <div class="track">
+    <div class="st on"><i></i><span>Collect</span></div>
+    <div class="st on"><i></i><span>Prepare</span></div>
+    <div class="st you"><i></i><span>Approve</span></div>
+    <div class="st on"><i></i><span>Sent</span></div>
+    <div class="st on"><i></i><span>Replied</span></div>
+    <div class="st hot"><i></i><span>Hot</span></div>
+  </div>
+  <div class="foot"><span>Hermes plugin</span><s></s><span>v1.1</span><s></s><span>Created by <em>ROCK</em></span></div>
+  <div class="shot" role="img" aria-label="SalesPilot Customers page with synthetic data"></div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "hermes-salespilot",
+  "label": "SalesPilot",
+  "description": "Desktop plugin API: pipeline, import, qualify, draft and inbox check. No web tab and no send route.",
+  "version": "1.1.0",
+  "tab": {
+    "hidden": true
+  },
+  "api": "plugin_api.py"
+}

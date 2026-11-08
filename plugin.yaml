@@ -1,0 +1,84 @@
+name: hermes-salespilot
+version: 1.1.0
+description: The AI sales desk for Hermes. Collect leads, draft outreach, send only after your approval, track replies and hot prospects.
+author:
+  name: ROCK
+  url: https://github.com/ranggaoscar
+license: MIT
+homepage: https://github.com/ranggaoscar
+manifest_version: 2
+api_version: 1
+requires_hermes: ">=0.22.0"
+kind: standalone
+tags:
+  - sales
+  - crm
+  - outreach
+  - b2b
+provides_tools:
+  - salespilot_onboard_business
+  - salespilot_import_customers
+  - salespilot_qualify_lead
+  - salespilot_research_opportunity
+  - salespilot_draft_outreach
+  - salespilot_plan_followups
+  - salespilot_report
+  - salespilot_request_approval
+  - salespilot_configure_mail
+  - salespilot_mission
+  - salespilot_pipeline
+config_schema:
+  followup_days:
+    type: int
+    default: 3
+    description: Default follow-up cadence in days when a new business profile omits one.
+    required: false
+  smtp_host:
+    type: str
+    default: ""
+    label: SMTP host
+    description: Mail server hostname. Leave empty until the wizard or this form supplies it.
+    required: false
+  smtp_port:
+    type: int
+    default: 587
+    label: SMTP port
+    description: 587 for STARTTLS, 465 for implicit TLS.
+    required: false
+  smtp_security:
+    type: str
+    choices: [starttls, tls]
+    default: starttls
+    label: SMTP security
+    description: STARTTLS upgrades on 587; tls means implicit TLS on 465.
+    required: false
+  from_address:
+    type: str
+    default: ""
+    label: Sender email
+    description: Address that appears in From. Must match the authenticated mailbox.
+    required: false
+  from_name:
+    type: str
+    default: ""
+    label: Sender name
+    description: Display name beside the sender email.
+    required: false
+  signature_text:
+    type: str
+    default: ""
+    label: Signature
+    description: Appended in plain text to every approved draft.
+    required: false
+  smtp_username:
+    type: secret
+    env: SALESPILOT_SMTP_USERNAME
+    label: SMTP username
+    description: Stored in Hermes credentials. Never written to config.yaml, SQLite or logs.
+    required: false
+  smtp_password:
+    type: secret
+    env: SALESPILOT_SMTP_PASSWORD
+    label: SMTP password
+    description: Stored in Hermes credentials. Read only through agent.secret_scope.
+    required: false

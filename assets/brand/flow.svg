@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="SalesPilot flow: Collect, Qualify, Prepare, Approve, Send, Replies, Follow up">
+<rect width="1200" height="300" rx="20" fill="#FBFAF6"/>
+<rect x=".5" y=".5" width="1199" height="299" rx="19.5" fill="none" stroke="#E3E0D7"/>
+<g font-family="Segoe UI, Helvetica Neue, Helvetica, Arial, sans-serif">
+<text x="64" y="52" font-size="13" font-weight="600" letter-spacing="2" fill="#6E8579">HOW SALESPILOT WORKS</text>
+<circle cx="842" cy="47" r="5" fill="#23735D"/><text x="853" y="52" font-size="13" fill="#6E8579">Hermes does the work</text><circle cx="1008" cy="47" r="5" fill="#0E1714"/><text x="1019" y="52" font-size="13" fill="#6E8579">You decide</text><circle cx="1102" cy="47" r="5" fill="#E0873F"/><text x="1113" y="52" font-size="13" fill="#6E8579">Heat</text>
+<line x1="125" y1="130" x2="1075" y2="130" stroke="#D9D5CA" stroke-width="2"/>
+<circle cx="125" cy="130" r="17" fill="#FBFAF6"/>
+<circle cx="125" cy="130" r="11" fill="#23735D"/>
+<text x="125" y="134.5" font-size="12" font-weight="700" text-anchor="middle" fill="#FBFAF6">1</text>
+<text x="125" y="186" font-size="19" font-weight="600" text-anchor="middle" fill="#0E1714">Collect</text>
+<text x="125" y="213" font-size="14" text-anchor="middle" fill="#56675F">Hermes finds companies</text>
+<text x="125" y="233" font-size="14" text-anchor="middle" fill="#56675F">or you import a CSV</text>
+<circle cx="283" cy="130" r="17" fill="#FBFAF6"/>
+<circle cx="283" cy="130" r="11" fill="#23735D"/>
+<text x="283" y="134.5" font-size="12" font-weight="700" text-anchor="middle" fill="#FBFAF6">2</text>
+<text x="283" y="186" font-size="19" font-weight="600" text-anchor="middle" fill="#0E1714">Qualify</text>
+<text x="283" y="213" font-size="14" text-anchor="middle" fill="#56675F">Checked against</text>
+<text x="283" y="233" font-size="14" text-anchor="middle" fill="#56675F">your ideal customer</text>
+<circle cx="442" cy="130" r="17" fill="#FBFAF6"/>
+<circle cx="442" cy="130" r="11" fill="#23735D"/>
+<text x="442" y="134.5" font-size="12" font-weight="700" text-anchor="middle" fill="#FBFAF6">3</text>
+<text x="442" y="186" font-size="19" font-weight="600" text-anchor="middle" fill="#0E1714">Prepare</text>
+<text x="442" y="213" font-size="14" text-anchor="middle" fill="#56675F">Draft written from</text>
+<text x="442" y="233" font-size="14" text-anchor="middle" fill="#56675F">quoted evidence</text>
+<circle cx="600" cy="130" r="21" fill="#FBFAF6"/>
+<circle cx="600" cy="130" r="15" fill="#0E1714"/>
+<path d="M595 130.5l3.6 3.6 6.8-7.2" fill="none" stroke="#F4F0E6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="600" y="186" font-size="19" font-weight="600" text-anchor="middle" fill="#0E1714">Approve</text>
+<text x="600" y="213" font-size="14" text-anchor="middle" fill="#56675F">You read it and</text>
+<text x="600" y="233" font-size="14" text-anchor="middle" fill="#56675F">confirm in chat</text>
+<circle cx="758" cy="130" r="17" fill="#FBFAF6"/>
+<circle cx="758" cy="130" r="11" fill="#23735D"/>
+<text x="758" y="134.5" font-size="12" font-weight="700" text-anchor="middle" fill="#FBFAF6">5</text>
+<text x="758" y="186" font-size="19" font-weight="600" text-anchor="middle" fill="#0E1714">Send</text>
+<text x="758" y="213" font-size="14" text-anchor="middle" fill="#56675F">One email from</text>
+<text x="758" y="233" font-size="14" text-anchor="middle" fill="#56675F">your own mailbox</text>
+<circle cx="917" cy="130" r="17" fill="#FBFAF6"/>
+<circle cx="917" cy="130" r="11" fill="#23735D"/>
+<text x="917" y="134.5" font-size="12" font-weight="700" text-anchor="middle" fill="#FBFAF6">6</text>
+<text x="917" y="186" font-size="19" font-weight="600" text-anchor="middle" fill="#0E1714">Replies</text>
+<text x="917" y="213" font-size="14" text-anchor="middle" fill="#56675F">Matched from</text>
+<text x="917" y="233" font-size="14" text-anchor="middle" fill="#56675F">your inbox</text>
+<circle cx="1075" cy="130" r="17" fill="#FBFAF6"/>
+<circle cx="1075" cy="130" r="11" fill="#E0873F"/>
+<text x="1075" y="134.5" font-size="12" font-weight="700" text-anchor="middle" fill="#FBFAF6">7</text>
+<text x="1075" y="186" font-size="19" font-weight="600" text-anchor="middle" fill="#0E1714">Follow up</text>
+<text x="1075" y="213" font-size="14" text-anchor="middle" fill="#56675F">Due reminders; interest</text>
+<text x="1075" y="233" font-size="14" text-anchor="middle" fill="#56675F">lands in Hot Prospects</text>
+<text x="600" y="276" font-size="13" text-anchor="middle" fill="#6E8579">Nothing is sent without step 4. A reply asking to stop puts the address on a do-not-contact list.</text>
+</g></svg>

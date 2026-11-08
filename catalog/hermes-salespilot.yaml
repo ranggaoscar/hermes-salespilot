@@ -1,0 +1,32 @@
+# Public v1.1.0 metadata. sha and image point at the published v1.1.0 commit.
+# Screenshots in docs/screenshots/v1.1 are synthetic fixtures on reserved .test domains.
+name: hermes-salespilot
+repo: https://github.com/ranggaoscar/hermes-salespilot
+sha: fed35f80bab3bc86e554bdd0a843246c68a38eeb
+description: "The AI sales desk for Hermes. Collect leads, draft outreach, send only after your approval, track replies and hot prospects."
+maintainer: ranggaoscar
+tier: community
+category: tools
+requires_hermes: ">=0.22.0"
+version: "1.1.0"
+image: https://raw.githubusercontent.com/ranggaoscar/hermes-salespilot/fed35f80bab3bc86e554bdd0a843246c68a38eeb/assets/catalog-cover.png
+platforms:
+  - windows
+  - linux
+  - macos
+capabilities:
+  provides_tools:
+    - salespilot_onboard_business
+    - salespilot_import_customers
+    - salespilot_qualify_lead
+    - salespilot_research_opportunity
+    - salespilot_draft_outreach
+    - salespilot_plan_followups
+    - salespilot_report
+    - salespilot_request_approval
+    - salespilot_configure_mail
+    - salespilot_mission
+    - salespilot_pipeline
+  provides_hooks: []
+  provides_middleware: []
+  requires_env: []

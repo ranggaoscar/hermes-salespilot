@@ -1,0 +1,14 @@
+Company,Contact,Email,Phone,Segment,Notes
+Palm Court Demo Villas,A. Demo,projects@palmcourt.example.invalid,628120000501,hospitality,Fictional account 1
+Gridline Demo Architects,B. Demo,studio@gridline.example.invalid,08120000502,architect,Fictional account 2
+South Dock Demo Contractors,C. Demo,site@southdock.example.invalid,628120000503,contractor,Fictional account 3
+Quiet Hotel Demo Group,D. Demo,stay@quiethotel.example.invalid,628120000504,hospitality,Fictional account 4
+Paper Room Demo Studio,E. Demo,hello@paperroom.example.invalid,628120000505,interior studio,Fictional account 5
+Lowtide Demo Build,F. Demo,bids@lowtide.example.invalid,628120000506,contractor,Fictional account 6
+Orchard Desk Demo,G. Demo,team@orcharddesk.example.invalid,628120000507,interior studio,Fictional account 7
+Kite Bay Demo Villas,H. Demo,frontdesk@kitebay.example.invalid,628120000508,hospitality,Fictional account 8
+North Glass Demo Lab,I. Demo,lab@northglass.example.invalid,628120000509,architect,Fictional account 9
+Small Pier Demo Works,J. Demo,works@smallpier.example.invalid,628120000510,contractor,Fictional account 10
+Palm Court Demo Villas,A. Demo,projects@palmcourt.example.invalid,628120000501,hospitality,Duplicate of row 2
+=HYPERLINK("https://example.invalid"),Bad Row,bad@example.invalid,628120000599,architect,Formula row must be rejected
+Broken Mail Demo,K. Demo,not-an-email,628120000511,architect,Invalid email is a warning not a guess

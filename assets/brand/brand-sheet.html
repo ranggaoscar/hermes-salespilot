@@ -1,0 +1,78 @@
+<!doctype html>
+<!-- Source for assets/brand/brand-sheet.png (1600x1000). Render at 1600x1000. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=block" rel="stylesheet">
+<style>
+  :root{--ink:#0E1714;--ivory:#F4F0E6;--paper:#FBFAF6;--sage:#6E8579;--line:#E3E0D7;--jade:#23735D;--jade-d:#4FB894;--ember:#E0873F}
+  html,body{margin:0;width:1600px;height:1000px;overflow:hidden;background:var(--paper)}
+  body{font-family:Geist,"Segoe UI",system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr 1fr;gap:0}
+  header{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;padding:44px 64px 28px;border-bottom:1px solid var(--line)}
+  header h1{margin:0;font-size:30px;font-weight:600;letter-spacing:-.03em}
+  header span{font:500 12px "Geist Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+  section{padding:36px 64px;border-bottom:1px solid var(--line);position:relative}
+  section:nth-of-type(odd){border-right:1px solid var(--line)}
+  .k{font:500 11px "Geist Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);margin:0 0 22px}
+  .icons{display:flex;align-items:flex-end;gap:34px}
+  .icons figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .icons figcaption{font:500 11px "Geist Mono",monospace;color:var(--sage)}
+  .lock{display:flex;align-items:center;gap:14px;font-size:38px;font-weight:600;letter-spacing:-.04em;padding:22px 26px;border-radius:14px}
+  .lock svg{width:44px;height:44px}
+  .lock.light{background:#fff;border:1px solid var(--line);color:var(--ink)}
+  .lock.light .m{color:var(--jade)}
+  .lock.dark{background:var(--ink);color:var(--ivory);margin-top:14px}
+  .lock.dark .m{color:var(--jade-d)}
+  .sw{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .sw div{height:92px;border-radius:12px;display:flex;flex-direction:column;justify-content:flex-end;padding:10px 12px;font:500 11px "Geist Mono",monospace}
+  .type p{margin:0}
+  .t1{font-size:56px;font-weight:600;letter-spacing:-.045em;line-height:1}
+  .t2{font-size:20px;color:#3F4E47;margin-top:14px!important;max-width:560px;line-height:1.4}
+  .t3{font:500 12px "Geist Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-top:18px!important}
+  .rules{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:15px;color:#2B3833;max-width:600px}
+  .rules b{font-weight:600}
+  .side{position:absolute;right:64px;top:36px;font:500 11px "Geist Mono",monospace;color:var(--sage)}
+</style>
+</head>
+<body>
+  <header><h1>SalesPilot · Identity</h1><span>Created by ROCK · v1.1</span></header>
+
+  <section>
+    <p class="k">App icon · holds at 16px</p>
+    <div class="icons">
+      <figure><img src="app-icon.svg" width="128" height="128" alt=""><figcaption>128</figcaption></figure>
+      <figure><img src="app-icon.svg" width="64" height="64" alt=""><figcaption>64</figcaption></figure>
+      <figure><img src="app-icon.svg" width="32" height="32" alt=""><figcaption>32</figcaption></figure>
+      <figure><img src="app-icon.svg" width="20" height="20" alt=""><figcaption>20</figcaption></figure>
+      <figure><img src="app-icon.svg" width="16" height="16" alt=""><figcaption>16</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <p class="k">Lockup · light and dark</p>
+    <div class="lock light"><svg class="m" viewBox="0 0 24 24" fill="none"><path d="M7.9 19.1A8.2 8.2 0 1 1 16.1 19.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 12.6 15.6 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12.6" r="1.9" fill="currentColor"/><circle cx="16.4" cy="8.2" r="1.9" fill="#E0873F"/></svg>SalesPilot</div>
+    <div class="lock dark"><svg class="m" viewBox="0 0 24 24" fill="none"><path d="M7.9 19.1A8.2 8.2 0 1 1 16.1 19.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 12.6 15.6 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12.6" r="1.9" fill="currentColor"/><circle cx="16.4" cy="8.2" r="1.9" fill="#F2A35C"/></svg>SalesPilot</div>
+  </section>
+
+  <section>
+    <p class="k">Colour · one signal, one heat</p>
+    <div class="sw">
+      <div style="background:#23735D;color:#fff">Jade<br>#23735D</div>
+      <div style="background:#4FB894;color:#06120E">Jade dark-mode<br>#4FB894</div>
+      <div style="background:#E0873F;color:#2A1606">Ember<br>#E0873F</div>
+      <div style="background:#0E1714;color:#F4F0E6">Ink<br>#0E1714</div>
+      <div style="background:#F4F0E6;color:#0E1714;border:1px solid #E3E0D7">Ivory<br>#F4F0E6</div>
+    </div>
+    <p class="t3" style="margin-top:18px">Jade = actions and progress. Ember = heat, used only for interest. Everything else is the host theme.</p>
+  </section>
+
+  <section>
+    <p class="k">Type · Geist for marketing, host font in the app</p>
+    <div class="type">
+      <p class="t1">Who needs you today.</p>
+      <p class="t2">The mark is a heading dial: an open instrument ring, a needle set north-east and an ember tip. It reads as the pilot's compass and the pipeline's gauge.</p>
+      <p class="t3">No robots · No glow · No sparkles</p>
+    </div>
+  </section>
+</body>
+</html>

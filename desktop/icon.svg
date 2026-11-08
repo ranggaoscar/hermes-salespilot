@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" role="img" aria-label="SalesPilot">
+  <!-- Heading dial: open instrument ring, needle set north-east, ember tip. Inherits currentColor. -->
+  <path d="M7.9 19.1A8.2 8.2 0 1 1 16.1 19.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <path d="M12 12.6 15.6 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="12" cy="12.6" r="1.9" fill="currentColor"/>
+  <circle cx="16.4" cy="8.2" r="1.9" fill="#E0873F"/>
+</svg>

@@ -1,0 +1,102 @@
+{
+  "business": {
+    "name": "Harborline Demo Supply",
+    "offer": "Specification support and sample coordination for architecture teams specifying interior stone.",
+    "offer_short": "Stone specification support",
+    "default_cta": "Reply if a one-page sample shortlist would be useful.",
+    "icp": {
+      "segments": ["architect", "contractor", "hospitality"],
+      "geos": ["demo harbor"],
+      "exclude": ["rival stone"],
+      "must_have": ["evidence", "source", "public_contact"]
+    },
+    "channels": ["email", "whatsapp"],
+    "constraints": ["approval_required", "no_blast", "no_invented_facts", "no_send_phase_1"],
+    "currency": "USD",
+    "locale": "en",
+    "default_country": "ID",
+    "followup_days": 3
+  },
+  "customers": [
+    {
+      "company": "Palm Court Demo Villas",
+      "contact_name": "A. Demo",
+      "email": "projects@palmcourt.example.invalid",
+      "phone": "628120000101",
+      "segment": "hospitality",
+      "source": "bundled-synthetic-demo",
+      "notes": "Fictional existing account. Not a real customer.",
+      "synthetic": true
+    },
+    {
+      "company": "Gridline Demo Architects",
+      "contact_name": "B. Demo",
+      "email": "studio@gridline.example.invalid",
+      "phone": "08120000202",
+      "segment": "architect",
+      "source": "bundled-synthetic-demo",
+      "notes": "Fictional existing account. Phone is stored with a trunk zero so import normalizes it.",
+      "synthetic": true
+    },
+    {
+      "company": "South Dock Demo Contractors",
+      "contact_name": "C. Demo",
+      "email": "site@southdock.example.invalid",
+      "phone": "628120000303",
+      "segment": "contractor",
+      "source": "bundled-synthetic-demo",
+      "notes": "Fictional existing account.",
+      "synthetic": true
+    }
+  ],
+  "prospects": [
+    {
+      "company": "Northwind Demo Studio",
+      "contact_name": "N. Demo",
+      "role": "Studio lead",
+      "email": "hello@northwind.example.invalid",
+      "phone": "628120000111",
+      "segment": "architect",
+      "country": "Demo Harbor",
+      "source_url": "https://example.invalid/northwind",
+      "evidence": "Publishes a studio contact page and lists hospitality interiors in Demo Harbor.",
+      "unknowns": ["project timeline"]
+    },
+    {
+      "company": "Lumen Demo Build",
+      "contact_name": "L. Demo",
+      "role": "Project coordinator",
+      "email": "bids@lumen.example.invalid",
+      "phone": "628120000222",
+      "segment": "contractor",
+      "country": "Demo Harbor",
+      "source_url": "https://example.invalid/lumen",
+      "evidence": "Public project page names an active interior fit-out and a company phone.",
+      "unknowns": []
+    },
+    {
+      "company": "Masked Pier Demo Co",
+      "contact_name": "",
+      "role": "",
+      "email": "",
+      "phone": "",
+      "segment": "architect",
+      "country": "Demo Harbor",
+      "source_url": "",
+      "evidence": "Directory snippet names the studio only. Contact digits are masked.",
+      "unknowns": ["public phone", "source url"]
+    },
+    {
+      "company": "Rival Stone Demo Supply",
+      "contact_name": "R. Demo",
+      "role": "Sales",
+      "email": "sales@rivalstone.example.invalid",
+      "phone": "628120000333",
+      "segment": "rival stone",
+      "country": "Demo Harbor",
+      "source_url": "https://example.invalid/rival",
+      "evidence": "Wholesale slab seller, not a specifier.",
+      "unknowns": []
+    }
+  ]
+}

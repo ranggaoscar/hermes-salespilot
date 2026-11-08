@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="SalesPilot">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2B8566"/>
+      <stop offset="1" stop-color="#17543F"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".22"/>
+      <stop offset=".5" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="118" fill="url(#tile)"/>
+  <rect x="3" y="3" width="506" height="506" rx="115" fill="none" stroke="url(#edge)" stroke-width="6"/>
+  <g transform="translate(76 76) scale(15)" fill="none">
+    <path d="M7.9 19.1A8.2 8.2 0 1 1 16.1 19.1" stroke="#F6F2E9" stroke-width="1.9" stroke-linecap="round"/>
+    <path d="M12 12.6 15.6 9" stroke="#F6F2E9" stroke-width="1.9" stroke-linecap="round"/>
+    <circle cx="12" cy="12.6" r="1.8" fill="#F6F2E9"/>
+    <circle cx="16.4" cy="8.2" r="1.85" fill="#F2A35C"/>
+  </g>
+</svg>
