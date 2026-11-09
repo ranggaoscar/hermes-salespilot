@@ -1210,6 +1210,8 @@ def list_events(conn: sqlite3.Connection, business_id: str) -> list[dict[str, An
 
 
 def save_mail_settings(conn: sqlite3.Connection, business_id: str, account: dict[str, Any]) -> None:
+    # A raw/legacy write must never inherit the operator's confirmation of a previous host.
+    conn.execute("DELETE FROM meta WHERE key=?", (f"smtp_operator_confirmation_v1:{business_id}",))
     now = domain.iso()
     conn.execute(
         """

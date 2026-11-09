@@ -1,6 +1,6 @@
 [project]
 name = "hermes-salespilot"
-version = "0.8.0"
+version = "1.1.1"
 description = "Vendor-neutral sales intelligence plugin for Hermes Agent"
 readme = "README.md"
 requires-python = ">=3.11"

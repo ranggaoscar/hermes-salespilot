@@ -10,6 +10,7 @@ from pathlib import Path
 
 import commands
 import mail
+import plugin_settings
 import storage
 import tools
 
@@ -63,17 +64,15 @@ class SlashSendTests(unittest.TestCase):
         self.business_id = seeded["business_id"]
         self.lead_id = next(item["id"] for item in seeded["prospects"] if item["decision"] == "qualified")
         self.draft = _call(tools.draft_outreach, {"lead_id": self.lead_id, "channel": "email"})
-        saved = _call(commands.configure_mail, {
-            "business_id": self.business_id,
+        with storage.unit_of_work() as conn:
+            plugin_settings.save_wizard_account(conn, self.business_id, {
             "host": "smtp.example.com",
             "port": 587,
             "security": "starttls",
             "from_address": "nia@example.com",
             "from_name": "Nia Demo",
             "signature_text": "Nia Demo, Cedarline",
-        })
-        self.assertTrue(saved["ok"])
-        self.assertNotIn("password", json.dumps(saved))
+            })
         self.calls = []
 
         def transport(account, username, password, message):

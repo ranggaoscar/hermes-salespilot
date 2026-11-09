@@ -1,5 +1,5 @@
 name: hermes-salespilot
-version: 1.1.0
+version: 1.1.1
 description: The AI sales desk for Hermes. Collect leads, draft outreach, send only after your approval, track replies and hot prospects.
 author:
   name: ROCK
@@ -8,7 +8,7 @@ license: MIT
 homepage: https://github.com/ranggaoscar
 manifest_version: 2
 api_version: 1
-requires_hermes: ">=0.22.0"
+requires_hermes: ">=0.23.0"
 kind: standalone
 tags:
   - sales

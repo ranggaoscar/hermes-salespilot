@@ -51,7 +51,12 @@ def configure_mail(args: dict, **kwargs) -> str:
     args = args or {}
     if _SECRET_ARGS.intersection(args):
         return _fail("secret_in_args", "SMTP username and password belong in Hermes secrets, not this call.")
-    action = str(args.get("action") or "save").strip().lower()
+    allowed = {"action", "business_id", "brand", "email", "reason"}
+    if set(args) - allowed:
+        return _fail("operator_settings_only", "SMTP transport and sender identity can only be changed in Hermes Settings or the confirmed Desktop wizard.")
+    action = str(args.get("action") or "status").strip().lower()
+    if action not in {"status", "check", "suppress"}:
+        return _fail("operator_settings_only", "Use Hermes Settings or the confirmed Desktop wizard to configure SMTP.")
     business_id = str(args.get("business_id") or "")
     with storage.unit_of_work() as conn:
         business = storage.get_business(conn, business_id)
@@ -83,12 +88,6 @@ def configure_mail(args: dict, **kwargs) -> str:
             result["username_present"] = bool(username)
             result["error"] = "" if result.get("ok") else "The SMTP server did not accept this connection. No email was sent."
             return _dump(result)
-        try:
-            account = mail.validate_account(args)
-        except (ValueError, TypeError) as exc:
-            return _fail("bad_mail_settings", str(exc))
-        storage.save_mail_settings(conn, business_id, account)
-        return _dump({"ok": True, "settings": _public_settings(account), "sent": False, "credentials_stored": False})
 
 
 def slash_send(raw_args: str) -> str:
@@ -210,8 +209,11 @@ def _finish(delivery_id: str, state: str, smtp_code: int) -> None:
 
 def _record_sent_message(prepared: dict, draft: dict, account: dict, result: dict, revision: str) -> None:
     """Persist the outbound evidence: who sent it, the Message-ID, and the exact content hash."""
-    import accounts as accounts_module
-    import inbox as inbox_module
+    try:
+        from . import accounts as accounts_module, inbox as inbox_module
+    except ImportError:
+        import accounts as accounts_module
+        import inbox as inbox_module
 
     with storage.unit_of_work() as conn:
         account_row = accounts_module.ensure_account(

@@ -221,28 +221,21 @@ APPROVAL = {
 CONFIGURE = {
     "name": "salespilot_configure_mail",
     "description": (
-        "Save non-secret SMTP and signature settings, check the connection, or suppress one address. "
-        "Never accepts a password. Does not send email."
+        "Report SMTP status, check the operator-configured connection, or suppress one address. "
+        "Cannot change transport or sender identity. Configure those in Hermes Settings or the Desktop wizard. Does not send email."
     ),
     "parameters": _obj(
         {
-            "action": _str("save, check, status, or suppress. Default save."),
+            "action": {"type": "string", "enum": ["check", "status", "suppress"], "description": "Default status."},
             "business_id": _str("Optional business id."),
-            "host": _str("SMTP host. No scheme or userinfo."),
-            "port": {"type": "integer", "description": "SMTP port. 587 for STARTTLS, 465 for TLS."},
-            "security": _str("starttls or tls."),
-            "from_address": _str("Sender email address."),
-            "from_name": _str("Sender display name."),
-            "position": _str("Sender position."),
-            "company": _str("Company name for the signature."),
-            "contact": _str("Public contact line for the signature. Do not put a password here."),
-            "signature_text": _str("Plain-text signature. HTML is escaped from this text."),
             "email": _str("Address to suppress when action is suppress."),
             "reason": _str("Why the address is suppressed."),
         },
         [],
     ),
 }
+
+CONFIGURE["parameters"]["additionalProperties"] = False
 
 MISSION = {
     "name": "salespilot_mission",

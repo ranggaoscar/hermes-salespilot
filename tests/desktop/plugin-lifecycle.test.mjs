@@ -114,6 +114,49 @@ test('Settings renders without the icp temporal-dead-zone crash', async () => {
   assert.match(text, /logistics/)
 })
 
+test('Save sender requires explicit confirmation naming SMTP destination and sender', async () => {
+  const react = await import(stubUrl('react.mjs'))
+  const plugin = await loadFresh()
+  const requests = []
+  const ctx = makeCtx()
+  ctx.rest = async (...args) => { requests.push(args); return { ok: true } }
+  plugin.default.register(ctx)
+  const data = { ok: true, business_id: 'synthetic', business: { name: 'Fictional Co' },
+    mail: { host: 'smtp.operator.example', port: 465, security: 'tls', from_address: 'sales@example.com', from_name: 'Operator' } }
+  react.__reset()
+  react.__beginRender()
+  const tree = plugin.__components.Setup({ data })
+  react.__endRender()
+  function findSave(node) {
+    if (!node || typeof node !== 'object') return null
+    if (node.props && node.props.onClick && textOf(node.children).trim() === 'Save sender') return node
+    for (const child of (Array.isArray(node) ? node : [node.children, ...Object.values(node.props || {})])) {
+      const found = findSave(child)
+      if (found) return found
+    }
+    return null
+  }
+  const button = findSave(tree)
+  assert.ok(button, 'real Settings component exposes Save sender')
+  try {
+    globalThis.window = { confirm: prompt => {
+      for (const text of ['smtp.operator.example:465', 'tls', 'sales@example.com', 'Operator']) assert.ok(prompt.includes(text))
+      return false
+    } }
+    button.props.onClick()
+    assert.equal(requests.length, 0, 'cancel must not persist transport')
+    window.confirm = () => true
+    button.props.onClick()
+    await new Promise(resolve => setImmediate(resolve))
+    assert.equal(requests.length, 1)
+    assert.equal(requests[0][1].body.confirm_transport, true)
+    assert.equal(requests[0][1].body.host, 'smtp.operator.example')
+    delete window.confirm
+    button.props.onClick()
+    assert.equal(requests.length, 1, 'missing confirmation API must fail closed')
+  } finally { delete globalThis.window }
+})
+
 test('Settings survives a missing or malformed ICP payload', async () => {
   const react = await import(stubUrl('react.mjs'))
   const plugin = await loadFresh()

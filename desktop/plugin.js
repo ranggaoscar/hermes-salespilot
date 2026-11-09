@@ -1572,7 +1572,10 @@ function Setup({ data, setSection, brands, switchBrand, notify, refresh, anchor 
             h('button', { key: 'r', type: 'button', className: 'sp-btn sp-btn-ghost sp-btn-sm', disabled: !!busy, onClick: () => post('/setup', { action: 'skip_mail' }, 'Research-only mode on. Nothing can be sent.', 'skip') }, mail.research_only ? 'Research-only mode is on' : 'Use research-only mode'),
             h('div', { key: 'b', className: 'sp-row' },
               h('button', { type: 'button', className: 'sp-btn', disabled: !!busy || !mail.configured, onClick: () => post('/setup', { action: 'check' }, '', 'check') }, busy === 'check' ? 'Testing…' : 'Test connection'),
-              h('button', { type: 'button', className: 'sp-btn sp-btn-primary', disabled: !!busy, onClick: () => post('/setup', { action: 'mail', host: form.host, port: form.port, security: form.security, from_address: form.from_address, from_name: form.from_name, signature: form.signature }, 'Sender saved.', 'mail') }, busy === 'mail' ? 'Saving…' : 'Save sender'))] }),
+              h('button', { type: 'button', className: 'sp-btn sp-btn-primary', disabled: !!busy, onClick: () => {
+                if (typeof window === 'undefined' || typeof window.confirm !== 'function' || !window.confirm(`Save SMTP transport?\nHost: ${form.host}:${form.port}\nSecurity: ${form.security}\nSender: ${form.from_name} <${form.from_address}>\nHermes Settings take precedence when configured. This does not send email.`)) return
+                post('/setup', { action: 'mail', confirm_transport: true, host: form.host, port: form.port, security: form.security, from_address: form.from_address, from_name: form.from_name, signature: form.signature }, 'Sender saved.', 'mail')
+              } }, busy === 'mail' ? 'Saving…' : 'Save sender'))] }),
         h(Card, { key: 'icp', id: 'sp-set-icp', title: 'Ideal customer profile', desc: 'Companies are only marked a fit when they match these. Press Enter after each value.',
           aside: h('span', { className: `sp-pill tone-${icpTone}` }, icpLabel),
           children: [

@@ -72,16 +72,16 @@ class SettingsTests(unittest.TestCase):
         self.assertEqual(account["host"], "smtp.example.com")
         self.assertEqual(account["from_address"], "sales@example.com")
 
-    def test_a_saved_account_wins_over_the_settings_form(self):
+    def test_native_settings_win_over_legacy_saved_account(self):
         plugin_settings.settings = lambda: {
             "smtp_host": "smtp.example.com", "smtp_port": 587, "smtp_security": "starttls",
             "from_address": "sales@example.com", "from_name": "Native", "signature_text": "",
         }
         saved = {"host": "smtp.wizard.test", "port": 465, "security": "tls", "from_address": "ops@wizard.test", "from_name": "Wizard", "signature_text": "W"}
         account, source = plugin_settings.effective_account(saved)
-        self.assertEqual(source, "saved")
-        self.assertEqual(account["host"], "smtp.wizard.test")
-        self.assertEqual(account["signature_text"], "W")
+        self.assertEqual(source, "plugin_settings")
+        self.assertEqual(account["host"], "smtp.example.com")
+        self.assertEqual(account["signature_text"], "")
 
     def test_native_settings_are_read_through_the_public_context(self):
         class Ctx:

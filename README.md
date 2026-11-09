@@ -53,7 +53,8 @@ All screenshots use [fictional data](docs/screenshots/README.md).
 3. **Define your ideal customer**: industries, locations and the job titles that buy.
 4. **Connect your email** in Settings → Email sending (your provider's SMTP server, sender name and
    address). Put the mailbox username and password in Hermes: *Settings → Plugins → SalesPilot*. They
-   are stored by Hermes, never by SalesPilot. Click **Test connection** — it signs in once and sends
+   are stored by Hermes, never by SalesPilot. Review and confirm **Save sender** before testing.
+   Native Hermes Settings take precedence over the wizard. Click **Test connection** — it signs in once and sends
    nothing. Prefer to look around first? Choose **research-only mode**; nothing can be sent.
 5. **Add customers**: *Import CSV*, or *Find leads with Hermes*.
 
@@ -99,7 +100,16 @@ hermes plugins enable hermes-salespilot --no-allow-tool-override
 ```
 
 Then open Hermes Desktop → Settings → Plugins → **Rescan** (or restart the app) and choose
-**SalesPilot** in the sidebar. Requires Hermes `>= 0.22.0`.
+**SalesPilot** in the sidebar. Requires Hermes `>= 0.23.0`.
+
+### Updating from 1.1.0
+
+Version **1.1.1** removes model access to SMTP transport and sender configuration. Existing SQLite
+mail settings have no reliable operator provenance, so they are retained but **not used for login**
+until you review and confirm them again in the Desktop wizard. Alternatively configure transport in
+Hermes Settings; those values always take precedence, with no fallback to a legacy host. Customer
+and message records are unchanged. IMAP now requires certificate- and hostname-verified TLS;
+plaintext IMAP is refused before reading credentials. See [security patch notes](docs/SECURITY-1.1.1.md).
 
 Copying this directory to `~/.hermes/plugins/hermes-salespilot` and enabling it also works. Do not copy
 the plugin into the Hermes source tree. `hermes plugins remove` deletes the install tree and keeps your
@@ -143,14 +153,15 @@ build step.
 | `salespilot_plan_followups` | Dated next step. Never a send |
 | `salespilot_report` | Counts, evidence, next actions |
 | `salespilot_request_approval` | Records an approval decision. Does not transmit |
-| `salespilot_configure_mail` | Save sender settings (no secrets) |
+| `salespilot_configure_mail` | Status, check the operator-configured connection, or suppress an address; cannot change transport or sender |
 | `salespilot_mission`, `salespilot_pipeline` | Discovery missions and pipeline actions |
 
 Bundled skill: `hermes-salespilot:salespilot`.
 
 ### Disclosure
 
-- **Network:** SMTP to your mail server, only inside `/salespilot-send` after you approve. IMAP to your
+- **Network:** SMTP connection checks authenticate only to the operator-configured server without sending.
+  Sending happens only inside `/salespilot-send` after you approve. IMAP to your
   mail server, read-only, only when Reply tracking is configured and you check the inbox. Fetching an
   authorized public URL during onboarding/research (proxy variables abort the fetch; the validated IP
   is pinned). Web search goes through Hermes' own search tool.

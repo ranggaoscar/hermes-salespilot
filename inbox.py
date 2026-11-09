@@ -11,6 +11,7 @@ import hashlib
 import imaplib
 import json
 import re
+import ssl
 from email.header import decode_header, make_header
 from email.utils import parseaddr, parsedate_to_datetime
 from typing import Any, Iterable
@@ -326,6 +327,8 @@ class ImapFetcher:
     """Real IMAP reader. Credentials are passed per call and never stored."""
 
     def __init__(self, host: str, port: int, username: str, password: str, *, use_ssl: bool = True):
+        if not use_ssl:
+            raise ValueError("IMAP requires TLS")
         self.host = host
         self.port = int(port)
         self.username = username
@@ -333,7 +336,9 @@ class ImapFetcher:
         self.use_ssl = use_ssl
 
     def _client(self):
-        return imaplib.IMAP4_SSL(self.host, self.port) if self.use_ssl else imaplib.IMAP4(self.host, self.port)
+        if not self.use_ssl:
+            raise ValueError("IMAP requires TLS")
+        return imaplib.IMAP4_SSL(self.host, self.port, ssl_context=ssl.create_default_context())
 
     def fetch_incremental(self, *, uidvalidity: str = "", last_uid: int = 0, days: int = 30) -> dict[str, Any]:
         client = self._client()
@@ -436,6 +441,8 @@ def run(conn, business_id: str, args: dict[str, Any]) -> dict[str, Any]:
 
     settings = storage.get_imap_settings(conn, business_id)
     configured = bool(settings.get("host") and settings.get("username"))
+    if action == "sync" and not bool(settings.get("use_ssl", 1)):
+        return {"ok": False, "code": "imap_tls_required", "error": "IMAP requires TLS.", "sent": False}
     username, password, secret_error = plugin_settings.credentials()
     secrets_present = bool(username and password)
 

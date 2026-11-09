@@ -6,12 +6,14 @@ password are declared ``type: secret`` with an explicit ``env:`` name, so Hermes
 through its credential route and this module reads them with ``agent.secret_scope.get_secret``.
 There is no second credential store here: values never enter SQLite, logs or an API response.
 
-Precedence, highest first: the account saved by the setup wizard (SQLite), then these settings,
-then the defaults below.
+Native Settings are authoritative. Only a newly confirmed Desktop wizard account can be used
+when native transport settings are empty; legacy SQLite accounts require operator reconfirmation.
 """
 
 from __future__ import annotations
 
+import hashlib
+import json
 from typing import Any
 
 PLUGIN_ID = "hermes-salespilot"
@@ -59,7 +61,8 @@ def settings() -> dict[str, Any]:
         try:
             value = get(key, default)
         except Exception:
-            continue
+            values["_read_error"] = True
+            return values
         if value is not None:
             values[key] = value
     return values
@@ -68,6 +71,8 @@ def settings() -> dict[str, Any]:
 def mail_defaults() -> dict[str, Any]:
     """Account-shaped defaults for fields the wizard has not saved yet."""
     values = settings()
+    if values.get("_read_error"):
+        return {"_read_error": True}
     return {field: values[key] for key, field in _FIELD_MAP.items()}
 
 
@@ -101,30 +106,56 @@ def credentials() -> tuple[str, str, str]:
 
 
 def effective_account(saved: dict[str, Any] | None) -> tuple[dict[str, Any] | None, str]:
-    """Merge the saved account over the native settings.
-
-    Returns ``(account, source)`` where source is ``saved``, ``plugin_settings``, ``incomplete`` or
-    ``invalid``. A saved field always wins, so editing Settings cannot silently redirect an account
-    the operator already confirmed inside the wizard.
-    """
+    """Resolve operator-approved authority, never fall back from partial/invalid native settings."""
     try:
-        import mail
+        from . import mail, storage
     except ImportError:
-        from . import mail
+        import mail
+        import storage
     defaults = mail_defaults()
-    if saved:
-        merged = dict(saved)
-        for key, fallback in defaults.items():
-            if not merged.get(key):
-                merged[key] = fallback
-        return merged, "saved"
-    candidate = {**defaults, "position": "", "company": "", "contact": ""}
+    if defaults.get("_read_error"):
+        return None, "settings_unavailable"
+    source = "plugin_settings"
+    candidate = dict(defaults)
+    if not defaults.get("host") and not defaults.get("from_address"):
+        if not saved:
+            return None, "incomplete"
+        # Old tool/wizard rows are indistinguishable. Preserve them but never authenticate to
+        # their host until an explicit operator save records the new confirmation fingerprint.
+        with storage.read_only() as conn:
+            row = conn.execute("SELECT value FROM meta WHERE key=?", (_approval_key(saved.get("business_id", "")),)).fetchone()
+        if row is None or row["value"] != _fingerprint(saved):
+            return None, "reconfirmation_required"
+        candidate = dict(saved)
+        source = "saved"
     if not candidate.get("host") or not candidate.get("from_address"):
         return None, "incomplete"
     try:
-        return mail.validate_account(candidate), "plugin_settings"
+        return mail.validate_account(candidate), source
     except (ValueError, TypeError):
         return None, "invalid"
+
+
+def _approval_key(business_id: str) -> str:
+    return f"smtp_operator_confirmation_v1:{business_id}"
+
+
+def _fingerprint(account: dict[str, Any]) -> str:
+    fields = {key: account.get(key) for key in ("host", "port", "security", "from_address", "from_name")}
+    return hashlib.sha256(json.dumps(fields, sort_keys=True).encode("utf-8")).hexdigest()
+
+
+def save_wizard_account(conn, business_id: str, account: dict[str, Any]) -> None:
+    """Desktop-only caller: invoke after explicit operator confirmation, never from a model tool."""
+    try:
+        from . import mail, storage
+    except ImportError:
+        import mail
+        import storage
+    validated = mail.validate_account(account)
+    storage.save_mail_settings(conn, business_id, validated)
+    conn.execute("INSERT OR REPLACE INTO meta(key, value) VALUES(?, ?)",
+                 (_approval_key(business_id), _fingerprint(validated)))
 
 
 def native_settings_path() -> list[str]:

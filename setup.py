@@ -278,23 +278,31 @@ def save(body: dict[str, Any]) -> dict[str, Any]:
             _save_profile(conn, business, {"mail_choice": "research_only", "research_only": True, "setup_step": 3})
         return status()
     if action == "mail":
-        result = json.loads(commands.configure_mail({
-            "action": "save",
-            "business_id": str(body.get("business_id") or ""),
-            "host": body.get("host") or "",
-            "port": body.get("port") or "",
-            "security": body.get("security") or "starttls",
-            "from_address": body.get("from_address") or "",
-            "from_name": body.get("from_name") or "",
-            "signature_text": body.get("signature") or "",
-            "company": body.get("company") or "",
-        }))
-        if not result.get("ok"):
-            return _clean(result)
+        if body.get("confirm_transport") is not True:
+            return {"ok": False, "code": "transport_confirmation_required",
+                    "error": "Review the SMTP host, port, security and sender, then explicitly confirm Save sender.", "sent": False}
+        try:
+            from . import mail as mail_module
+        except ImportError:
+            import mail as mail_module
+        try:
+            account = mail_module.validate_account({
+                "host": body.get("host") or "",
+                "port": body.get("port") or "",
+                "security": body.get("security") or "starttls",
+                "from_address": body.get("from_address") or "",
+                "from_name": body.get("from_name") or "",
+                "signature_text": body.get("signature") or "",
+                "company": body.get("company") or "",
+            })
+        except (ValueError, TypeError) as exc:
+            return {"ok": False, "code": "bad_mail_settings", "error": str(exc), "sent": False}
         with storage.unit_of_work() as conn:
             business = storage.get_business(conn, str(body.get("business_id") or ""))
-            if business is not None:
-                _save_profile(conn, business, {"mail_choice": "smtp", "research_only": False, "setup_step": 3})
+            if business is None:
+                return {"ok": False, "code": "missing_business", "sent": False}
+            plugin_settings.save_wizard_account(conn, business["id"], account)
+            _save_profile(conn, business, {"mail_choice": "smtp", "research_only": False, "setup_step": 3})
         return status()
     if action == "check":
         result = json.loads(commands.configure_mail({"action": "check", "business_id": str(body.get("business_id") or "")}))
